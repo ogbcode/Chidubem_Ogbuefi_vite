@@ -3,7 +3,7 @@ import { Controller } from '@nestjs/common';
 import { UsersService } from './users.service';
 //import { CreateUserDto } from './dto/create-user.dto';
 //import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersServiceController, CreateUserDto, UpdateUserDto, UsersServiceControllerMethods, FindOneUserDto, PaginationDto, FindOneUserByPrimaryEmailAddressDto } from '@common/hms-lib';
+import { UsersServiceController, CreateUserDto, UpdateUserDto, UsersServiceControllerMethods, FindOneUserDto, PaginationDto, FindOneUserByPrimaryEmailAddressDto, User } from '@common/hms-lib';
 import { Observable } from 'rxjs';
 
 @Controller()
@@ -15,8 +15,9 @@ export class UsersController implements UsersServiceController {
     return this.usersService.create(createUserDto);
   }
 
-  findAllUsers() {
-    return this.usersService.findAll();
+  async findAllUsers(): Promise<{ users: User[] }> {
+    const users = await this.usersService.findAll();
+    return { users };
   }
 
   findOneUser(findOneUserDto: FindOneUserDto) {

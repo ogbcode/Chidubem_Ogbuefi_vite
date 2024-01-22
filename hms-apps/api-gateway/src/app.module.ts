@@ -10,10 +10,23 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join} from 'path';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 
 @Module({
-  imports: [ServeStaticModule.forRoot({rootPath: join(__dirname, '../../..', 'users-demo-frontend','dist'),}),
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432, // Default PostgreSQL port
+      username: 'ogb',
+      password: 'admin',
+      database: 'postgres',
+      synchronize: true,
+      autoLoadEntities: true,
+      logging: true,
+    }),
+    ServeStaticModule.forRoot({rootPath: join(__dirname, '../../..', 'users-demo-frontend','dist'),}),
             EmployeesModule, PatientsModule, ClinicsModule, PharmaciesModule, AuthModule, UsersModule
     ],
   controllers: [AppController],
