@@ -4,6 +4,7 @@ import { VersioningType } from '@nestjs/common';
 import * as i18next from 'i18next';
 import * as i18nextMiddleware from 'i18next-http-middleware';
 import { join } from 'path';
+import * as Backend from "i18next-fs-backend";
 async function bootstrap() {
   
   const app = await NestFactory.create(AppModule);
