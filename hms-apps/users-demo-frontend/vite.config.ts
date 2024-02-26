@@ -1,10 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from "path";
+import { VitePWA } from 'vite-plugin-pwa';
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),
+    VitePWA({
+      strategies: 'injectManifest',
+      srcDir: 'src/custom-sw',
+      filename: 'my-sw.ts'
+    })
+  ],
   server: {
     proxy: {
       '/users': {
@@ -13,10 +21,10 @@ export default defineConfig({
       }
     }
   },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./@"),
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     "@": path.resolve(__dirname, "./@"),
+  //   },
+  // },
 })
 

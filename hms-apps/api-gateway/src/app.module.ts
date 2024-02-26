@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,26 +8,22 @@ import { PharmaciesModule } from './pharmacies/pharmacies.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join} from 'path';
-import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { join } from 'path';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432, // Default PostgreSQL port
-      username: 'ogb',
-      password: 'admin',
-      database: 'postgres',
-      synchronize: true,
-      autoLoadEntities: true,
-      logging: true,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../../../..', 'users-demo-frontend', 'dist'),
+      exclude: ['/api*'],
     }),
-    ServeStaticModule.forRoot({rootPath: join(__dirname, '../../..', 'users-demo-frontend','dist'),}),
-            EmployeesModule, PatientsModule, ClinicsModule, PharmaciesModule, AuthModule, UsersModule
-    ],
+    // TypeOrmModule.forRoot(typeOrmConfig),
+    EmployeesModule,
+    PatientsModule,
+    ClinicsModule,
+    PharmaciesModule,
+    AuthModule,
+    UsersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

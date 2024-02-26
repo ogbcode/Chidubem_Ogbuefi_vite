@@ -1,4 +1,4 @@
-import { H1 } from "@/components/ui/typography";
+import { H1 } from "../../@/components/ui/typography";
 import { useQuery } from "@tanstack/react-query";
 //import { useEffect, useState } from "react";
 import {User} from '@common/hms-lib';
@@ -8,7 +8,8 @@ type Props = {
   title?: string
 }
 
-const Users: React.FC<Props> = () => {
+const Users: React.FC<Props> = ({title}) => {
+
 
   //use below if using useEffect. Not efficient enough.
   /*const [users, setUsers] = useState<any>();
@@ -38,10 +39,14 @@ const Users: React.FC<Props> = () => {
 
   //const data = useMemo(() => serverData ?? [], [serverData]);
 
+  
+
+   
+
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
-          <H1>Users</H1>
+          <H1>{title}</H1>
           <DisplayUsers data={data.users as User[]}/>
       </section>
     </>

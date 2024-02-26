@@ -16,7 +16,7 @@ import { join } from 'path';
           options:{
             url: 'localhost:5000',//defaults to localhost:5000
             package: IDENTITY_PACKAGE_NAME,
-            protoPath: join(__dirname, "../../proto/identity.proto")
+            protoPath: join(__dirname, "../../../proto/identity.proto")
           }
         }
       ]

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -12,7 +12,7 @@ export class User {
   firstName: string;
 
   @Column({ nullable: true })
-  middleName?: string | null;
+  middleName?: string | undefined;
 
   @Column()
   lastName: string;
@@ -23,8 +23,8 @@ export class User {
   @Column()
   backupEmailAddress: string;
 
-  @Column({ nullable: true })
-  phone: { [key: string]: any } | null;
+  @Column("json", { nullable: true })
+  phone: object | null;
 
   @Column({ default: false })
   isPrimaryEmailAddressVerified: boolean;
